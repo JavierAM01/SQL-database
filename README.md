@@ -49,9 +49,9 @@ estilos Gung Fu y Wing Chun, transmitiendo ambos a su alumno Leung Bok Chau.
 
 ## Pasos a seguir
 
-   1. Ejecutar el script completo 'kung_fu_panda.sql' para crear la base de datos.
-   2. Ejecutar el script completo: 'insertar_datos.sql' para rellenar la base de datos.
-   3. Abrir 'pruebas.sql' para que el profesor pueda probar y escribir el código que 
+   1. Ejecutar el script completo *kung_fu_panda.sql* para crear la base de datos.
+   2. Ejecutar el script completo: *insertar_datos.sql* para rellenar la base de datos.
+   3. Abrir *pruebas.sql* para que el profesor pueda probar y escribir el código que 
   crea necesario para probar la base de datos (seguir los comentarios).
 
 
@@ -68,8 +68,8 @@ En este modelo he supuesto las siguientes características:
  - TIPO: Es una jerarquía parcial solapada. Un practicante puede ser tanto maestro como estudiante a la vez (un maestro que quiera aprender nuevos estilos) y además no todos los practicantes tienen porqué ser de alguno de los dos tipos, pues se puede dar por ejemplo el caso de que un estudiante halla terminado su entrenamiento y esté en proceso de ser maestro, pero en ese momento no es ninguno de los dos (si fuera jerarquía total, en ese momento habría que eliminarlo de practicantes y perderíamos todos sus datos: nombre, apellidos... y tendríamos que volver a pedírselos y añadirlos cuando se haga maestro).
  - PRACTICAR $(N/M)$: Cada maestro tiene que practicar al menos un estilo (obvio, pues de lo contrario de qué sería maestro). Por otro lado, un estilo puede no ser practicado por ningún maestro, en el caso de que fuera antiguo y con el paso del tiempo se haya perdido.
  - FUNDAR $(1/1)$: Cada estilo puede ser fundado por 1 maestro (o ninguno) y cada maestro puede fundar a lo sumo, un estilo, pues este será el que representa su forma de hacer Kung Fu, no tiene sentido que pueda fundar más de un estilo.
- - DERIVAR $(N/M)$: Cada estilo puede derivar de varios otros estilos. Como la mayoría (según mi suposición) no derivan de otros estilos es mejor crear una relación derivar, en vez de tener un atributo “derivados” en la entidad “estilo”, para así poder evitarnos la aparición de muchos nulos. Además, un estilo podría derivar de más de un estilo, por lo que el atributo “derivados” tendría que ser multivaluado, y nos daría problemas a la hora de hacer la tablas.
- - GUIAR $(N/M)$: Cada estudiante sigue mínimo un entrenamiento, de lo contrario no sería estudiante y sería un practicante. Y cada entrenamiento puede ser seguido por varios estudiantes, aunque también se puede dar el caso de que ninguno lo siga, 'clase vacía'.
+ - DERIVAR $(N/M)$: Cada estilo puede derivar de varios otros estilos. Como la mayoría (según mi suposición) no derivan de otros estilos es mejor crear una relación derivar, en vez de tener un atributo *derivados* en la entidad *estilo*, para así poder evitarnos la aparición de muchos nulos. Además, un estilo podría derivar de más de un estilo, por lo que el atributo *derivados* tendría que ser multivaluado, y nos daría problemas a la hora de hacer la tablas.
+ - GUIAR $(N/M)$: Cada estudiante sigue mínimo un entrenamiento, de lo contrario no sería estudiante y sería un practicante. Y cada entrenamiento puede ser seguido por varios estudiantes, aunque también se puede dar el caso de que ninguno lo siga, *clase vacía*.
 
 
 
@@ -77,24 +77,24 @@ En este modelo he supuesto las siguientes características:
 
 Notación: \underline{clave primaria}, \uwave{clave alternativa}.
 
- - PRACTICANTES (\underline{NIF}, nombre, primer\_apellido, segundo\_apellido, fecha\_nacimiento)
+ - PRACTICANTES (\underline{NIF}, nombre, primer_apellido, segundo_apellido, fecha_nacimiento)
  - ESTILOS (\underline{codigo}, nombre, origen, tipo)
- - ENTRENAMIENTOS (\underline{NIF\_maestro, codigo\_estilo} )
-		- entrenamientos(NIF\_maestro) $ \longrightarrow $ practicantes(NIF)
-		- entrenamientos(codigo\_estilo) $ \longrightarrow $ estilos(codigo)
- - GUIAR (\underline{NIF\_estudiante, NIF\_maestro, codigo\_estilo})
-		- guiar(NIF\_estudiante) $ \longrightarrow $ practicantes(NIF)
-		- guiar(NIF\_maestro,codigo\_estilo) $ \longrightarrow $ entrenamientos(NIF\_maestro,codigo\_estilo)
+ - ENTRENAMIENTOS (\underline{NIF_maestro, codigo_estilo} )
+		- entrenamientos(NIF_maestro) $\longrightarrow$ practicantes(NIF)
+		- entrenamientos(codigo_estilo) $\longrightarrow$ estilos(codigo)
+ - GUIAR (\underline{NIF\_estudiante, NIF\_maestro, codigo_estilo})
+		- guiar(NIF_estudiante) $\longrightarrow$ practicantes(NIF)
+		- guiar(NIF_maestro,codigo_estilo) $\longrightarrow$ entrenamientos(NIF\_maestro,codigo\_estilo)
  - ESTUDIANTES (\underline{NIF})
-		- estudiantes(NIF) $ \longrightarrow $ guiar(NIF\_estudiante)
+		- estudiantes(NIF) $\longrightarrow$ guiar(NIF\_estudiante)
  - MAESTROS (\underline{NIF})
-		- maestros(NIF) $ \longrightarrow $ entrenamientos(NIF\_maestro)
- - DERIVAR (\underline{codigo\_estilo\_nuevo, codigo\_estilo\_derivador})
-		- derivar(codigo\_estilo\_nuevo) $ \longrightarrow $ estilos(codigo)
-		- derivar(codigo\_estilo\_derivador) $ \longrightarrow $ estilos(codigo)
- - FUNDAR (\underline{NIF\_maestro}, \uwave{codigo\_estilo})
-		- fundar(NIF\_maestro) $ \longrightarrow $ maestros(NIF)
-		- fundar(codigo\_estilo) $ \longrightarrow $ estilos(codigo)
+		- maestros(NIF) $\longrightarrow$ entrenamientos(NIF\_maestro)
+ - DERIVAR (\underline{codigo\_estilo\_nuevo, codigo_estilo_derivador})
+		- derivar(codigo_estilo_nuevo) $\longrightarrow$ estilos(codigo)
+		- derivar(codigo_estilo_derivador) $\longrightarrow$ estilos(codigo)
+ - FUNDAR (\underline{NIF_maestro}, \uwave{codigo_estilo})
+		- fundar(NIF_maestro) $\longrightarrow$ maestros(NIF)
+		- fundar(codigo_estilo) $\longrightarrow$ estilos(codigo)
 
 
 En todas las relaciones el borrado y la modificación está puesto en cascade. Los motivos de borrado son claros:
@@ -109,7 +109,7 @@ y los de modificación seguirían un razonamiento análogo al de borrado.
 
 
 
-Para llevar a cabo las tablas he supuesto que, al contrario que el enunciado, la tabla 'PRACTICANTES' puede contener individuos que no estén en ningún entrenamiento. ¿Por qué? El hecho es el siguiente, imaginemos que hay un personaje apuntado a un entrenamiento y cuando lo termina, en el proceso de apuntarse a otro o hacerse maestro, lo eliminamos de 'PRACTICANTES'. Entonces habremos borrado todos sus datos (NIF, nombre, …) y al volverlo a introducir (a lo mejor minutos más tarde) tendríamos que volver a introducir todos sus datos. Por este motivo he querido mantener una tabla 'PRACTICANTES' con todos los datos personales, y luego individualmente según sean 'ESTUDIANTES' o 'MAESTROS' se les va añadiendo a un lado o a otro.
+Para llevar a cabo las tablas he supuesto que, al contrario que el enunciado, la tabla 'PRACTICANTES' puede contener individuos que no estén en ningún entrenamiento. ¿Por qué? El hecho es el siguiente, imaginemos que hay un personaje apuntado a un entrenamiento y cuando lo termina, en el proceso de apuntarse a otro o hacerse maestro, lo eliminamos de *PRACTICANTES*. Entonces habremos borrado todos sus datos (NIF, nombre, ...) y al volverlo a introducir (a lo mejor minutos más tarde) tendríamos que volver a introducir todos sus datos. Por este motivo he querido mantener una tabla *PRACTICANTES* con todos los datos personales, y luego individualmente según sean *ESTUDIANTES* o *MAESTROS* se les va añadiendo a un lado o a otro.
 
 
 ## Tablas
@@ -264,7 +264,7 @@ CREATE FUNCTION get_percentage_no_founder() RETURNS FLOAT
 Por último definiremos los disparadores, que nos ayudarán mantener nuestra base de datos más dinámica.
 
 
- - Después de insertar algún valor en la tabla guiar nos aseguramos de añadirla luego a la tabla estudiantes (el trigger tiene que ser después de la acción pues si no daría un error de foreign key, pues estudiantes(NIF) apunta a guiar(NIF\_estudiante)). Es decir, para no tener que estar insertando valores manualmente cada vez que insertemos en guiar, este disparador nos asegura que todos los practicantes que estén apuntados en algún entrenamiento, estén guardados en la tabla de estudiantes.
+ - Después de insertar algún valor en la tabla guiar nos aseguramos de añadirla luego a la tabla estudiantes (el trigger tiene que ser después de la acción pues si no daría un error de foreign key, pues estudiantes(NIF) apunta a guiar(NIF_estudiante)). Es decir, para no tener que estar insertando valores manualmente cada vez que insertemos en guiar, este disparador nos asegura que todos los practicantes que estén apuntados en algún entrenamiento, estén guardados en la tabla de estudiantes.
 
 ```sql
 	CREATE TRIGGER after_insert_guiar AFTER INSERT ON guiar FOR EACH ROW
@@ -275,7 +275,7 @@ Por último definiremos los disparadores, que nos ayudarán mantener nuestra bas
 	END$$
 ```
 	
- - Después de insertar valores en la tabla de entrenamientos, si el maestro en cuestión no está en la tabla de maestros, entonces lo añadimos (este trigger daría errores si lo pondríamos antes de la ejecución pues daría un error de foreing key de que maestro(NIF) no 'encuentra' entrenamientos(NIF\_maestro))
+ - Después de insertar valores en la tabla de entrenamientos, si el maestro en cuestión no está en la tabla de maestros, entonces lo añadimos (este trigger daría errores si lo pondríamos antes de la ejecución pues daría un error de foreing key de que maestro(NIF) no 'encuentra' entrenamientos(NIF_maestro))
 
 ```sql
 	CREATE TRIGGER after_insert_entrenamientos AFTER INSERT ON entrenamientos FOR EACH ROW 
@@ -286,7 +286,7 @@ Por último definiremos los disparadores, que nos ayudarán mantener nuestra bas
 	END$$
 ```
 	
- - Antes de insertar una tupla en la tabla fundar, es decir, introducir que un cierto practicante ha fundado un cierto estilo, añadiríamos antes a la tabla entrenamientos que ese practicante practica ese nuevo estilo (ya que no tendría sentido que no lo practique si él mismo es el que lo ha fundado). Como podemos observar, para que un practicante funde un estilo, este no ha de ser maestro previamente aunque fundar(NIF\_maestro) apunte a maestros(NIF), pues antes de insertar en fundar, este trigger inserta un entrenamiento y otro disparador,'after\_insert\_entrenamientos', inserta el NIF en maestros. Lo que nos asegura que fundar(NIF\_maestro) apunte a maestros(NIF) es, que este proceso se ha ejecutado correctamente y que si hay un practicante en fundar, este está en la tabla maestros también.
+ - Antes de insertar una tupla en la tabla fundar, es decir, introducir que un cierto practicante ha fundado un cierto estilo, añadiríamos antes a la tabla entrenamientos que ese practicante practica ese nuevo estilo (ya que no tendría sentido que no lo practique si él mismo es el que lo ha fundado). Como podemos observar, para que un practicante funde un estilo, este no ha de ser maestro previamente aunque fundar(NIF_maestro) apunte a maestros(NIF), pues antes de insertar en fundar, este trigger inserta un entrenamiento y otro disparador,*after_insert_entrenamientos*, inserta el NIF en maestros. Lo que nos asegura que fundar(NIF_maestro) apunte a maestros(NIF) es, que este proceso se ha ejecutado correctamente y que si hay un practicante en fundar, este está en la tabla maestros también.
 
 	Este disparador se lanza si ya existe dicho estilo (para no añadir un entrenamiento antes de lanzar un error y cambiar datos) y obviamente si dicho entrenamiento no está ya añadido en la tabla entrenamientos (que quien manipule la base de datos no sepa que eso era automático y lo haya añadido antes manualmente).
 
@@ -301,7 +301,7 @@ CREATE TRIGGER before_insert_fundar BEFORE INSERT ON fundar FOR EACH ROW
 	END$$
 ```
 	
- - Depués de eliminar una tupla de la tabla fundar, eliminamos el entrenamiento que añadimos en su momento al añadir la tupla. Esta acción ha de hacerse después pues en el caso de ser antes, se lanzaría este disparador eliminaría el entrenamiento en cuestión y además la eliminación en cascada de mestros, si solo había ese entrenamiento con ese maestro, eliminaría el maestro de la tabla maestros y por lo tanto, es este mismo momento (y hasta que se ejecute finalmente la acción de eliminar la tupla de fundar) tendríamos que NEW.NIF\_maestro no apunta a ningún maestro, por lo que obtendríamos un error.
+ - Depués de eliminar una tupla de la tabla fundar, eliminamos el entrenamiento que añadimos en su momento al añadir la tupla. Esta acción ha de hacerse después pues en el caso de ser antes, se lanzaría este disparador eliminaría el entrenamiento en cuestión y además la eliminación en cascada de mestros, si solo había ese entrenamiento con ese maestro, eliminaría el maestro de la tabla maestros y por lo tanto, es este mismo momento (y hasta que se ejecute finalmente la acción de eliminar la tupla de fundar) tendríamos que NEW.NIF_maestro no apunta a ningún maestro, por lo que obtendríamos un error.
 
 ```sql
 	CREATE TRIGGER after_delete_fundar AFTER DELETE ON fundar FOR EACH ROW 
@@ -348,7 +348,7 @@ CREATE TRIGGER before_insert_derivar BEFORE INSERT ON derivar FOR EACH ROW
 
 ## Inserción de datos
 
-Finalmente añadimos una serie de datos random para poder probar nuestra base de datos. Para ello creamos la tabla practicantes y los estilos desde la página Mockaroo y apartir de esas dos tablas con un script de python nos rellenamos las demás tablas con sentido, es decir, cumpliendo todas las restricciones impuestas y finalmente generamos una función (en ese mismo script) que nos devuelva un texto para poder introducir todos estos datos por SQL. El código en python sin entrar en detalles sería el siguiente y gracias a él generamos el código en SQL de insertar\_datos.sql.
+Finalmente añadimos una serie de datos random para poder probar nuestra base de datos. Para ello creamos la tabla practicantes y los estilos desde la página <a href="https://www.mockaroo.com/">mockaroo</a> y apartir de esas dos tablas, con un script de python, nos rellenamos las demás tablas con sentido, es decir, cumpliendo todas las restricciones impuestas y finalmente generamos una función (en ese mismo script) que nos devuelva un texto para poder introducir todos estos datos por SQL. El código en python sin entrar en detalles sería el siguiente y gracias a él generamos el código en SQL de *insertar_datos.sql*.
 
 ```python
 import pandas as pd
@@ -469,4 +469,4 @@ insert_df_in_SQL(guiar, "guiar", [2])
 
 ## Conclusión
 
-En esta base de datos la tabla 'estudiantes' y la tabla 'maestros' no se manipulan manualmente en ningún momento, los disparadores 'after\_insert\_guiar' y 'after\_insert\_entrenamientos' se encangan de eso y además las claves foráneas se encargan de que no se puedan añadir estudiantes ni maestros que no esten ni en la tabla guiar ni entrenamientos respectivamente y por ser borrado en cascada, se tiene que si se eliminar tuplas de guiar o de entrenamientos se eliminarán automaticamente los estudiantes y maestros necesarios. Con el comando: 'call get\_0\_training()' también podemos ver de una forma rápida y fácil los datos de todos los practicantes que no son ni estudiantes ni maestros, y así hacer una valoración individual de si eliminarlos de la base de datos o no. Por último comentar que también al introducir valores en la tabla 'fundar' ya se encarga un disparador de añadir el entrenamiento de ese maestro enseñando el estilo que ha fundado, aunque antes de eso habría que añadir el estilo nuevo a la tabla 'estilos'.
+En esta base de datos la tabla *estudiantes* y la tabla *maestros* no se manipulan manualmente en ningún momento, los disparadores *after_insert_guiar* y *after_insert_entrenamientos* se encangan de eso y además las claves foráneas se encargan de que no se puedan añadir estudiantes ni maestros que no esten ni en la tabla guiar ni entrenamientos respectivamente y por ser borrado en cascada, se tiene que si se eliminar tuplas de guiar o de entrenamientos se eliminarán automaticamente los estudiantes y maestros necesarios. Con el comando: *call get_0_training()* también podemos ver de una forma rápida y fácil los datos de todos los practicantes que no son ni estudiantes ni maestros, y así hacer una valoración individual de si eliminarlos de la base de datos o no. Por último comentar que también al introducir valores en la tabla *fundar* ya se encarga un disparador de añadir el entrenamiento de ese maestro enseñando el estilo que ha fundado, aunque antes de eso habría que añadir el estilo nuevo a la tabla *estilos*.
