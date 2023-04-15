@@ -14,7 +14,7 @@
  - [Funciones y procedimientos](#id4)
  - [Disparadores](#id5)
  - [Inserción de datos](#id6)
- - [Conclusión](#id7)
+ - [Conclusiones](#id7)
 
 
 ## Enunciado <a name=id0></a>
@@ -482,6 +482,12 @@ insert_df_in_SQL(guiar, "guiar", [2])
 
 
 
-## Conclusión <a name=id7></a>
+## Conclusiones <a name=id7></a>
 
-En esta base de datos la tabla *estudiantes* y la tabla *maestros* no se manipulan manualmente en ningún momento, los disparadores *after_insert_guiar* y *after_insert_entrenamientos* se encangan de eso y además las claves foráneas se encargan de que no se puedan añadir estudiantes ni maestros que no esten ni en la tabla guiar ni entrenamientos respectivamente y por ser borrado en cascada, se tiene que si se eliminar tuplas de guiar o de entrenamientos se eliminarán automaticamente los estudiantes y maestros necesarios. Con el comando: *call get_0_training()* también podemos ver de una forma rápida y fácil los datos de todos los practicantes que no son ni estudiantes ni maestros, y así hacer una valoración individual de si eliminarlos de la base de datos o no. Por último comentar que también al introducir valores en la tabla *fundar* ya se encarga un disparador de añadir el entrenamiento de ese maestro enseñando el estilo que ha fundado, aunque antes de eso habría que añadir el estilo nuevo a la tabla *estilos*.
+ - En esta base de datos la tabla *estudiantes* y la tabla *maestros* no se manipulan manualmente en ningún momento, los disparadores *after_insert_guiar* y *after_insert_entrenamientos* se encangan de eso y además las claves foráneas se encargan de que no se puedan añadir estudiantes ni maestros que no esten ni en la tabla *guiar* ni *entrenamientos* respectivamente.
+
+ - Por ser borrado en cascada, se tiene que si se eliminar tuplas de *guiar* o de *entrenamientos* se eliminarán automaticamente los estudiantes y maestros necesarios.
+ 
+ - Con el comando: *call get_0_training()* también podemos ver de una forma rápida y sencilla los datos de todos los practicantes que no son ni estudiantes ni maestros, y así hacer una valoración individual de si eliminarlos de la base de datos o no. 
+ 
+ - Por último comentar que también al introducir valores en la tabla *fundar* ya se encarga un disparador de añadir el entrenamiento de ese maestro enseñando el estilo que ha fundado, aunque antes de eso habría que añadir el estilo nuevo a la tabla *estilos*.
