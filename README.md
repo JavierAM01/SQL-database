@@ -363,8 +363,11 @@ CREATE TRIGGER before_insert_derivar BEFORE INSERT ON derivar FOR EACH ROW
 
 ## Inserción de datos <a name=id6></a>
 
-Finalmente añadimos una serie de datos random para poder probar nuestra base de datos. Para ello creamos la tabla practicantes y los estilos desde la página <a href="https://www.mockaroo.com/">mockaroo</a> y apartir de esas dos tablas, con un script de python, nos rellenamos las demás tablas con sentido, es decir, cumpliendo todas las restricciones impuestas y finalmente generamos una función (en ese mismo script) que nos devuelva un texto para poder introducir todos estos datos por SQL. El código en python sin entrar en detalles sería el siguiente y gracias a él generamos el código en SQL de *insertar_datos.sql*.
+Finalmente añadimos una serie de datos random para poder probar nuestra base de datos. Para ello creamos la tabla practicantes y los estilos desde la página <a href="https://www.mockaroo.com/">mockaroo</a> y apartir de esas dos tablas, con el script *insertarSQL.py* de python (guardado en la carpeta *data*), nos rellenamos las demás tablas con sentido, es decir, cumpliendo todas las restricciones impuestas y finalmente generamos una función (en ese mismo script) que nos devuelva un texto para poder introducir todos estos datos por SQL. El código en python sin entrar en detalles sería el siguiente y gracias a él generamos el código en SQL de *insertar_datos.sql*.
 
+
+ - Primero cargamos los datos recogidos de mockaroo (guardados en los archivos *practicantes.csv* y *estilos.csv*).
+ 
 ```python
 import pandas as pd
 import numpy as np
@@ -378,8 +381,11 @@ estilos = pd.read_csv(f2)
 estilos["codigo"] += 1
 
 np.random.seed(99)
+```
 
-# -------------------------------
+ - Generamos los datos de *entrenamientos* y *maestros*
+
+```python
 entrenamientos = []
 maestros = []
 d_entrena = {}
@@ -396,8 +402,11 @@ for nif in d_entrena:
 		entrenamientos.append([nif, cod])
 
 maestros = list(set(maestros))
+```
 
-# -------------------------------
+ - Generamos los datos de *fundar*
+
+```python
 fundar = []
 nifs = np.random.choice(maestros, 15)
 cods = np.random.choice(estilos["codigo"], 15)
@@ -412,15 +421,21 @@ for i in range(n_min):
 		d_fundar[nif] = [cod]
 	else:
 		d_fundar[nif].append(cod)
+```
 
-# -------------------------------
+ - Generamos los datos de *derivar*
+
+```python
 derivar = []
 cods = [np.random.choice(estilos["codigo"]) for i in range(10)]
 cods  = list(set(cods))
 if len(cods) % 2 != 0: cods = cods[:-1]
 derivar = [[cods[2*i], cods[2*i+1]] for i in range(int(len(cods)/2))]
+```
 
-# -------------------------------
+ - Generamos los datos de *guiar*
+
+```python
 guiar = []
 nif_estudiantes = np.random.choice(practicantes["NIF"], 200)
 entrenas_index = np.random.randint(0, len(entrenamientos), 200)
@@ -444,7 +459,11 @@ for entrena in d:
 				continue
 		if NIF_est != nif_mae:
 			guiar.append([NIF_est, nif_mae, cod])
+```
 
+ - Definimos un serie de funciones para atraves de un dataframe o una lista, devolver un comando SQL para generar dicha tabla.
+
+```python
 def insert_df_in_SQL(df, table, integers=[], drop=False):
 	insert = ""
 	insert += f"INSERT INTO {table} VALUES"
@@ -471,7 +490,11 @@ def insert_list_in_SQL(lista, table):
 	insert = insert[:-1]
 	insert += "\n;"
 	print(insert)
+```
 
+ - Imprimimos los datos por panatalla
+
+```python
 insert_df_in_SQL(practicantes.values, "practicantes")
 insert_df_in_SQL(estilos.values, "estilos(nombre,origen,tipo)", [0], True)
 insert_df_in_SQL(fundar, "fundar", [1])
