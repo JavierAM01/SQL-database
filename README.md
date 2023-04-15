@@ -13,10 +13,7 @@
 
 ### Esquema E/R.
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.75]{imagenes/esquema_ER_final.png}
-\end{figure}
+<image src="images/esquema_ER_final.png">
 
 
 En este modelo he supuesto las siguientes características:
