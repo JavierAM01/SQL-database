@@ -75,26 +75,26 @@ En este modelo he supuesto las siguientes características:
 
 ### Esquema relacional.
 
-Notación: \underline{clave primaria}, \uwave{clave alternativa}.
+Notación: **clave primaria**, *clave alternativa*.
 
- - PRACTICANTES (\underline{NIF}, nombre, primer_apellido, segundo_apellido, fecha_nacimiento)
- - ESTILOS (\underline{codigo}, nombre, origen, tipo)
- - ENTRENAMIENTOS (\underline{NIF_maestro, codigo_estilo} )
-		- entrenamientos(NIF_maestro) $\longrightarrow$ practicantes(NIF)
-		- entrenamientos(codigo_estilo) $\longrightarrow$ estilos(codigo)
- - GUIAR (\underline{NIF\_estudiante, NIF\_maestro, codigo_estilo})
-		- guiar(NIF_estudiante) $\longrightarrow$ practicantes(NIF)
-		- guiar(NIF_maestro,codigo_estilo) $\longrightarrow$ entrenamientos(NIF\_maestro,codigo\_estilo)
- - ESTUDIANTES (\underline{NIF})
-		- estudiantes(NIF) $\longrightarrow$ guiar(NIF\_estudiante)
- - MAESTROS (\underline{NIF})
-		- maestros(NIF) $\longrightarrow$ entrenamientos(NIF\_maestro)
- - DERIVAR (\underline{codigo\_estilo\_nuevo, codigo_estilo_derivador})
-		- derivar(codigo_estilo_nuevo) $\longrightarrow$ estilos(codigo)
-		- derivar(codigo_estilo_derivador) $\longrightarrow$ estilos(codigo)
- - FUNDAR (\underline{NIF_maestro}, \uwave{codigo_estilo})
-		- fundar(NIF_maestro) $\longrightarrow$ maestros(NIF)
-		- fundar(codigo_estilo) $\longrightarrow$ estilos(codigo)
+ - PRACTICANTES (**NIF**, nombre, primer_apellido, segundo_apellido, fecha_nacimiento)
+ - ESTILOS (**codigo**, nombre, origen, tipo)
+ - ENTRENAMIENTOS (**NIF_maestro, codigo_estilo**)
+	- entrenamientos(NIF_maestro) $\longrightarrow$ practicantes(NIF)
+	- entrenamientos(codigo_estilo) $\longrightarrow$ estilos(codigo)
+ - GUIAR (**NIF_estudiante, NIF_maestro, codigo_estilo**)
+	- guiar(NIF_estudiante) $\longrightarrow$ practicantes(NIF)
+	- guiar(NIF_maestro,codigo_estilo) $\longrightarrow$ entrenamientos(NIF\_maestro,codigo\_estilo)
+ - ESTUDIANTES (**NIF**)
+	- estudiantes(NIF) $\longrightarrow$ guiar(NIF\_estudiante)
+ - MAESTROS (**NIF**)
+	- maestros(NIF) $\longrightarrow$ entrenamientos(NIF\_maestro)
+ - DERIVAR (**codigo_estilo_nuevo, codigo_estilo_derivador**)
+	- derivar(codigo_estilo_nuevo) $\longrightarrow$ estilos(codigo)
+	- derivar(codigo_estilo_derivador) $\longrightarrow$ estilos(codigo)
+ - FUNDAR (**NIF_maestro**, *codigo_estilo*)
+	- fundar(NIF_maestro) $\longrightarrow$ maestros(NIF)
+	- fundar(codigo_estilo) $\longrightarrow$ estilos(codigo)
 
 
 En todas las relaciones el borrado y la modificación está puesto en cascade. Los motivos de borrado son claros:
