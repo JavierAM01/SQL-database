@@ -1,6 +1,6 @@
 # SQL-tables
 
-## Pasos para seguir el trabajo:
+## Pasos a seguir
 
    1. Ejecutar el script completo 'kung_fu_panda.sql' para crear la base de datos.
    2. Ejecutar el script completo: 'insertar_datos.sql' para rellenar la base de datos.
