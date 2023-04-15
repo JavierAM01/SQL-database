@@ -1,8 +1,23 @@
 # SQL-tables
 
 
+## Índice 
 
-## Enunciado
+ - [Enunciado](#id0)
+ - [Pasos a seguir](#id1)
+ - [Esquemas](#id2)
+	 - [Esquema E/R](#id2.1)
+	 - [Esquema Relacional](#id2.2)
+ - [Tablas](#id3)
+	 - [Entidades (y superentidades)](#id3.1)
+	 - [Relaciones](#id3.2)
+ - [Funciones y procedimientos](#id4)
+ - [Disparadores](#id5)
+ - [Inserción de datos](#id6)
+ - [Conclusión](#id7)
+
+
+## Enunciado <a name=id0></a>
 
 El Kung Fu es un arte milenario chino que engloba todos los aspectos
 de la defensa personal y el manejo de las armas, basado en principios filosófos budistas y taoístas. El
@@ -47,7 +62,7 @@ estilos Gung Fu y Wing Chun, transmitiendo ambos a su alumno Leung Bok Chau.
 
 
 
-## Pasos a seguir
+## Pasos a seguir <a name=id1></a>
 
    1. Ejecutar el script completo *kung_fu_panda.sql* para crear la base de datos.
    2. Ejecutar el script completo: *insertar_datos.sql* para rellenar la base de datos.
@@ -56,9 +71,9 @@ estilos Gung Fu y Wing Chun, transmitiendo ambos a su alumno Leung Bok Chau.
 
 
 
-## Esquemas
+## Esquemas <a name=id2></a>
 
-### Esquema E/R.
+### Esquema E/R <a name=id2.1></a>
 
 <image src="images/esquema_ER_final.png">
 
@@ -73,7 +88,7 @@ En este modelo he supuesto las siguientes características:
 
 
 
-### Esquema relacional.
+### Esquema Relacional <a name=id2.2></a>
 
 Notación: **clave primaria**, *clave alternativa*.
 
@@ -112,13 +127,13 @@ y los de modificación seguirían un razonamiento análogo al de borrado.
 Para llevar a cabo las tablas he supuesto que, al contrario que el enunciado, la tabla 'PRACTICANTES' puede contener individuos que no estén en ningún entrenamiento. ¿Por qué? El hecho es el siguiente, imaginemos que hay un personaje apuntado a un entrenamiento y cuando lo termina, en el proceso de apuntarse a otro o hacerse maestro, lo eliminamos de *PRACTICANTES*. Entonces habremos borrado todos sus datos (NIF, nombre, ...) y al volverlo a introducir (a lo mejor minutos más tarde) tendríamos que volver a introducir todos sus datos. Por este motivo he querido mantener una tabla *PRACTICANTES* con todos los datos personales, y luego individualmente según sean *ESTUDIANTES* o *MAESTROS* se les va añadiendo a un lado o a otro.
 
 
-## Tablas
+## Tablas <a name=id3></a>
 
 El código que genera las tablas es el siguiente. Lo dividiremos en dos partes.
 
 *Nota: El siguiente código no está escrito en el mismo orden que en el del script SQL, para que se ejecute bien, por motivos de claves ajenas, la tabla guiar se debe ejecutar antes que la de estudiantes (en el script está en el órden correcto) pero aquí lo he separado así para tener una lectura más ordenada.*
 
-### Entidades (y superentidades).
+### Entidades (y superentidades) <a name=id3.1></a>
 
 ```sql
 CREATE TABLE IF NOT EXISTS practicantes (
@@ -159,7 +174,7 @@ CREATE TABLE IF NOT EXISTS maestros (
 );
 ```
 
-### Relaciones
+### Relaciones <a name=id3.2></a>
 
 ```sql
 CREATE TABLE IF NOT EXISTS guiar (
@@ -192,7 +207,7 @@ CREATE TABLE IF NOT EXISTS fundar (
 
 
 
-## Funciones y procedimientos
+## Funciones y procedimientos <a name=id4></a>
 
 Por otro lado tenemos una serie de funciones para poder sacar información de nuestra base de datos. El código en SQL para crear estas funciones es el siguiente. Primero redefinimos DELIMITER para poder utilizar el punto y coma en el interior de las funciones, procedimientos y triggers y al final de sus definiciones lo volvemos a redefinir.
 
@@ -259,7 +274,7 @@ CREATE FUNCTION get_percentage_no_founder() RETURNS FLOAT
 ```
 
 
-## Disparadores
+## Disparadores <a name=id5></a>
 
 Por último definiremos los disparadores, que nos ayudarán mantener nuestra base de datos más dinámica.
 
@@ -346,7 +361,7 @@ CREATE TRIGGER before_insert_derivar BEFORE INSERT ON derivar FOR EACH ROW
 
 
 
-## Inserción de datos
+## Inserción de datos <a name=id6></a>
 
 Finalmente añadimos una serie de datos random para poder probar nuestra base de datos. Para ello creamos la tabla practicantes y los estilos desde la página <a href="https://www.mockaroo.com/">mockaroo</a> y apartir de esas dos tablas, con un script de python, nos rellenamos las demás tablas con sentido, es decir, cumpliendo todas las restricciones impuestas y finalmente generamos una función (en ese mismo script) que nos devuelva un texto para poder introducir todos estos datos por SQL. El código en python sin entrar en detalles sería el siguiente y gracias a él generamos el código en SQL de *insertar_datos.sql*.
 
@@ -467,6 +482,6 @@ insert_df_in_SQL(guiar, "guiar", [2])
 
 
 
-## Conclusión
+## Conclusión <a name=id7></a>
 
 En esta base de datos la tabla *estudiantes* y la tabla *maestros* no se manipulan manualmente en ningún momento, los disparadores *after_insert_guiar* y *after_insert_entrenamientos* se encangan de eso y además las claves foráneas se encargan de que no se puedan añadir estudiantes ni maestros que no esten ni en la tabla guiar ni entrenamientos respectivamente y por ser borrado en cascada, se tiene que si se eliminar tuplas de guiar o de entrenamientos se eliminarán automaticamente los estudiantes y maestros necesarios. Con el comando: *call get_0_training()* también podemos ver de una forma rápida y fácil los datos de todos los practicantes que no son ni estudiantes ni maestros, y así hacer una valoración individual de si eliminarlos de la base de datos o no. Por último comentar que también al introducir valores en la tabla *fundar* ya se encarga un disparador de añadir el entrenamiento de ese maestro enseñando el estilo que ha fundado, aunque antes de eso habría que añadir el estilo nuevo a la tabla *estilos*.
