@@ -461,7 +461,7 @@ for entrena in d:
 			guiar.append([NIF_est, nif_mae, cod])
 ```
 
- - Definimos un serie de funciones para atraves de un dataframe o una lista, devolver un comando SQL para generar dicha tabla.
+ - Definimos un serie de funciones para a través de un dataframe o una lista, devolver un comando SQL para generar dicha tabla.
 
 ```python
 def insert_df_in_SQL(df, table, integers=[], drop=False):
