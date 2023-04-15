@@ -1,4 +1,4 @@
-# SQL-tables
+# SQL-database
 
 
 ## Índice 
