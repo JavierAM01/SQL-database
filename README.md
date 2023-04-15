@@ -1,5 +1,52 @@
 # SQL-tables
 
+
+
+## Enunciado
+
+El Kung Fu es un arte milenario chino que engloba todos los aspectos
+de la defensa personal y el manejo de las armas, basado en principios filosófos budistas y taoístas. El
+maestro de Kung Fu Shifu se encarga de entrenar a los grandes luchadores de su territorio incluyendo
+los famosos Cinco Furiosos (Tigresa, Víbora, Grulla, Mono y Mantis).
+Recientemente, el Maestro Oogway ha designado al Panda Po como Guerrero del Dragón, lo que
+le ha liberado de sus deberes como aprendiz de fabricante de fideos en el restaurante de su padre. Esto
+ha provocado un gran incremento en el número de solicitudes de admisión en la escuela de Shifu, lo
+que hace urgente diseñar una base de datos que permita a los maestros de Kung Fu consultar de forma
+eficiente la información de sus alumnos:
+
+ 1. Los practicantes se registran en la base de datos indicando su NIF, nombre, apellido y fecha
+de nacimiento. Estos se clasifican en estudiantes, los cuales no han perseverado lo suficiente
+en la práctica del Kung Fu, y maestros, que han alcanzado el nivel de perfección necesario para
+compartir sus conocimientos.
+
+ 2. El Kung Fu se compone de una enorme variedad de estilos, haciendo de él una de las disciplinas
+marciales más completas al comprender todo tipo de técnicas, tanto de brazos como de piernas y
+ya sea sin armas o con ellas. Esto lo diferencia de otros sistemas de lucha que se han especializado
+limitando el uso de las técnicas. Cada estilo se identifica mediante un código numérico y posee
+un nombre único dentro del sistema. Los estilos se pueden clasificar según su origen geográfico
+en estilos del norte y estilos del sur. También se pueden dividir atendiendo al tipo de técnicas
+que emplean en estilos internos o estilos externos, aunque algunos de ellos combinan todas ellas.
+Por ejemplo, el estilo de la Grulla Blanca procede del sur de China y es un estilo externo, ya que
+en él predomina el uso de las técnicas fuertes.
+
+ 3. Ciertos estilos de Kung Fu incorporan los mejores aspectos de otros, considerándose derivados.
+Por ejemplo, el estilo de la Mantis Religiosa deriva del estilo Shaolín e incluye la técnica de pies
+del estilo Mono. Asimismo, existen seis variaciones del estilo Mono, entre las que podemos citar
+el estilo del Mono Borracho y el estilo del Mono Perdido.
+
+ 4. Se desconoce el origen histórico de algunos estilos, sin embargo se sabe que otros fueron fundados
+por importantes maestros de Kung Fu. Por ejemplo, la monja budista Ng Mui ideó el estilo Wing
+Chun inspirada por una escena de combate entre una serpiente y una grulla. Para ello, tomó de la
+grulla su calma, suavidad y sentido del equilibrio, e incorporó de los movimientos de la serpiente
+su direccionalidad y ataque recto.
+
+ 5. Los practicantes de Kung Fu practican al menos uno de los estilos almacenados en el sistema.
+Los maestros guían a otros practicantes, entrenándolos en los estilos que ellos mismos practican,
+entre los cuales se incluyen los que han fundado. Por ejemplo, la maestra Ng Mui practica los
+estilos Gung Fu y Wing Chun, transmitiendo ambos a su alumno Leung Bok Chau.
+
+
+
 ## Pasos a seguir
 
    1. Ejecutar el script completo 'kung_fu_panda.sql' para crear la base de datos.
