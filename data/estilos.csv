@@ -1,0 +1,21 @@
+codigo,nombre,origen,tipo
+0,Aegypius tracheliotus,S,IE
+1,Ursus maritimus,S,E
+2,Cercopithecus aethiops,S,IE
+3,Acrantophis madagascariensis,N,I
+4,Tursiops truncatus,S,IE
+5,Felis concolor,N,I
+6,Chauna torquata,N,IE
+7,Coluber constrictor,S,E
+8,Naja haje,N,IE
+9,Dasypus novemcinctus,S,I
+10,Dolichitus patagonum,S,IE
+11,Dasypus septemcincus,S,I
+12,unavailable,N,I
+13,Felis patagonum,S,IE
+14,Spheniscus mendiculus,S,E
+15,Genetta genetta,N,I
+16,Callorhinus ursinus,N,IE
+17,Eremophila alpestris,S,E
+18,Redunca redunca,S,IE
+19,Oxybelis sp.,N,E
