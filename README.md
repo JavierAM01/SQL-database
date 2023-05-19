@@ -1,5 +1,6 @@
 # SQL-database
 
+<img align="right" src="images/bd.jpg" width="400" height="400" />
 
 ## Índice 
 
